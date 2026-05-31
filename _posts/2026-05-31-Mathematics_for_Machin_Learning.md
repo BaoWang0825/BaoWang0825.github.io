@@ -1,10 +1,15 @@
+---
+title: "Mathematics for Machine Learning"
+date: 2024-03-15
+---
+
 # Mathematics for Machine Learning
 
 A collection of resources to learn and review mathematics for machine learning.
 
 **NOTES: This is from [dair-ai/Mathematics-for-ML](https://github.com/dair-ai/Mathematics-for-ML). Here, I use this document to test for blog in my template.**
 
-# :book: Books
+# 📄 Books
 
 ### Algebra, Topology, Differential Calculus, and Optimization Theory For Computer Science and Machine Learning
 *by Jean Gallier and Jocelyn Quaintance*
