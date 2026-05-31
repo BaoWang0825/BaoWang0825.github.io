@@ -1,9 +1,7 @@
 ---
-title: "Mathematics for Machine Learning"
+title: "Mathematics for Machine Learning!"
 date: 2024-03-15
 ---
-
-# Mathematics for Machine Learning
 
 A collection of resources to learn and review mathematics for machine learning.
 
