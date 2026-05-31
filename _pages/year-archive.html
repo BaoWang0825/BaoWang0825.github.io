@@ -8,12 +8,122 @@ redirect_from:
 ---
 
 {% include base_path %}
-{% capture written_year %}'None'{% endcapture %}
-{% for post in site.posts %}
-  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
-    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
-    {% capture written_year %}{{ year }}{% endcapture %}
-  {% endif %}
-  {% include archive-single.html %}
-{% endfor %}
+
+<style>
+  .blog-container {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  .blog-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .blog-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .tag-cloud {
+    position: sticky;
+    top: 2rem;
+    background: #f8f9fa;
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+  }
+  .tag-cloud h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.5rem;
+  }
+  .tag-cloud ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .tag-cloud li {
+    margin-bottom: 0.5rem;
+  }
+  .tag-cloud a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .tag-cloud a:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+    color: #212529;
+  }
+  .tag-cloud .count {
+    font-size: 0.75rem;
+    color: #868e96;
+    background: #f1f3f5;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+  .tag-cloud .empty {
+    color: #868e96;
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .blog-container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .blog-sidebar {
+      width: 100%;
+      order: -1;
+    }
+    .tag-cloud {
+      position: static;
+    }
+  }
+</style>
+
+<div class="blog-container">
+  <div class="blog-content">
+    {% capture written_year %}'None'{% endcapture %}
+    {% for post in site.posts %}
+      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% if year != written_year %}
+        <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
+        {% capture written_year %}{{ year }}{% endcapture %}
+      {% endif %}
+      {% include archive-single.html %}
+    {% endfor %}
+  </div>
+  
+  <aside class="blog-sidebar">
+    <div class="tag-cloud">
+      <h3>🏷️ Tags</h3>
+      {% assign sorted_tags = site.tags | sort %}
+      {% if sorted_tags.size > 0 %}
+        <ul>
+          {% for tag in sorted_tags %}
+            <li>
+              <a href="{{ site.baseurl }}/tags/#{{ tag[0] | slugify }}">
+                <span>{{ tag[0] }}</span>
+                <span class="count">{{ tag[1].size }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="empty">暂无标签</p>
+      {% endif %}
+    </div>
+  </aside>
+</div>

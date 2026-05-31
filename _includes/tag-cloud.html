@@ -1,0 +1,25 @@
+{% case site.tag_archive.type %}
+  {% when "liquid" %}
+    {% assign path_type = "#" %}
+  {% when "jekyll-archives" %}
+    {% assign path_type = nil %}
+{% endcase %}
+
+{% assign sorted_tags = site.tags | sort %}
+<div class="tag-cloud">
+  <h3>🏷️ Tags</h3>
+  {% if sorted_tags.size > 0 %}
+    <ul>
+      {% for tag in sorted_tags %}
+        <li>
+          <a href="{{ site.baseurl }}{{ site.tag_archive.path }}{{ tag[0] | slugify | prepend: path_type }}">
+            <span>{{ tag[0] }}</span>
+            <span class="tag-count">{{ tag[1].size }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p style="color: #999; font-size: 0.9em; margin: 0;">暂无标签</p>
+  {% endif %}
+</div>

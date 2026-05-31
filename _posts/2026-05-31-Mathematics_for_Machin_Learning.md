@@ -1,6 +1,7 @@
 ---
 title: "Mathematics for Machine Learning"
 date: 2024-03-15
+tags: [machine-learning, mathematics, turorial]
 ---
 
 # Mathematics for Machine Learning
